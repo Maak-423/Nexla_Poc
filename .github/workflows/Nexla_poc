@@ -1,4 +1,4 @@
-name: My First GitHub Actions
+name: Nexla GitHub Actions
 
 on: [push]
 
@@ -22,7 +22,7 @@ jobs:
       run: |
         pip3 install nexla-3.2.1-py3-none-any.whl
 
-    - name: Configure Nexla Environment
+    - name: Configuring Nexla Environment
       env:
         NEXLA_ENVIRONMENT: ${{ secrets.NEXLA_ENVIRONMENT }}
         NEXLA_ACCESS_TOKEN: ${{ secrets.NEXLA_ACCESS_TOKEN }}
