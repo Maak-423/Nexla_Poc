@@ -28,5 +28,4 @@ jobs:
         NEXLA_ACCESS_TOKEN: ${{ secrets.NEXLA_ACCESS_TOKEN }}
       run: |
         nexla env configure \
-        --environment "$NEXLA_ENVIRONMENT" \
-        --access-token "$NEXLA_ACCESS_TOKEN"
+        --environment "$NEXLA_ENVIRONMENT"
