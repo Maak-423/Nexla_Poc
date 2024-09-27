@@ -22,6 +22,14 @@ jobs:
       run: |
         pip3 install nexla-3.2.1-py3-none-any.whl
 
+    - name: Debug Environment Variables
+      run: |
+        echo "NEXLA_ENVIRONMENT: $NEXLA_ENVIRONMENT"
+        echo "NEXLA_ACCESS_TOKEN: $NEXLA_ACCESS_TOKEN"
+      env:
+        NEXLA_ENVIRONMENT: ${{ secrets.NEXLA_ENVIRONMENT }}
+        NEXLA_ACCESS_TOKEN: ${{ secrets.NEXLA_ACCESS_TOKEN }}
+
     - name: Configure Nexla Environment
       env:
         NEXLA_ENVIRONMENT: ${{ secrets.NEXLA_ENVIRONMENT }}
