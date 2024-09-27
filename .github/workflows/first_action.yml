@@ -12,6 +12,7 @@ jobs:
 
     steps:
     - uses: actions/checkout@v3
+    
     - name: Set up Python
       uses: actions/setup-python@v2
       with:
@@ -21,6 +22,11 @@ jobs:
       run: |
         pip3 install nexla-3.2.1-py3-none-any.whl
 
-    - name: Run tests
+    - name: Configure Nexla Environment
+      env:
+        NEXLA_ENVIRONMENT: ${{ secrets.NEXLA_ENVIRONMENT }}
+        NEXLA_ACCESS_TOKEN: ${{ secrets.NEXLA_ACCESS_TOKEN }}
       run: |
-        nexla --version
+        nexla env configure \
+        --environment "$NEXLA_ENVIRONMENT" \
+        --access-token "$NEXLA_ACCESS_TOKEN"
