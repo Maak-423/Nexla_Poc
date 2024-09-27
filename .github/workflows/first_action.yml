@@ -29,5 +29,4 @@ jobs:
       run: |
         cat <<EOF | nexla env configure
         dataops.nexla.io
-        $NEXLA_ACCESS_TOKEN
         EOF
