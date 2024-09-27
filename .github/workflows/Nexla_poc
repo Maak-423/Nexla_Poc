@@ -1,4 +1,4 @@
-name: Nexla GitHub Actions
+name: My First GitHub Actions
 
 on: [push]
 
@@ -27,7 +27,6 @@ jobs:
         NEXLA_ENVIRONMENT: ${{ secrets.NEXLA_ENVIRONMENT }}
         NEXLA_ACCESS_TOKEN: ${{ secrets.NEXLA_ACCESS_TOKEN }}
       run: |
-        nexla env configure << EOF
-        $NEXLA_ENVIRONMENT
-        $NEXLA_ACCESS_TOKEN
-        EOF
+        nexla env configure \
+        --environment "$NEXLA_ENVIRONMENT" \
+        --access-token "$NEXLA_ACCESS_TOKEN"
