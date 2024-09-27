@@ -23,7 +23,7 @@ jobs:
         #pip install pytest
         pip3 install nexla-3.2.1-py3-none-any.whl
 
-    - #name: Run tests
+  #  - #name: Run tests
       #run: |
         #cd src
         #python -m pytest addition.py
