@@ -24,12 +24,12 @@ jobs:
 
     - name: Debug Nexla Environment and Token
       run: |
-        echo "Environment: $NEXLA_ENVIRONMENT"
-        echo "Access Token: $NEXLA_ACCESS_TOKEN"
+        echo "Environment: ${{ secrets.NEXLA_ENVIRONMENT }}"
+        echo "Access Token: ${{ secrets.NEXLA_ACCESS_TOKEN }}"
 
     - name: Configuring Nexla Environment
       env:
-        NEXLA_ENVIRONMENT: dataops.nexla.io
-        NEXLA_ACCESS_TOKEN: eyJhbGciOiJIUzI1NiJ9.eyJ1aWQiOjE4ODQsIm9pZCI6MjA4LCJzdWIiOiJfTlhfQVBJXyIsImlhdCI6MTcyNzc2MDMyMywiZXhwIjoxNzI3ODQ2NzIzLCJlbnYiOiJwcm86NTcxZGYyNWRjYjIxYzhkMTc0YzU2NzY2ZGIzODhjNjEiLCJybmQiOiJoYjk0NXk5YyJ9.ot2H7FxcKeMTBGfNqlimOHw7AvmhrbJQGHnk7xI-wv0
+        NEXLA_ENVIRONMENT: ${{ secrets.NEXLA_ENVIRONMENT }}
+        NEXLA_ACCESS_TOKEN: ${{ secrets.NEXLA_ACCESS_TOKEN }}
       run: |
         nexla env configure --environment "$NEXLA_ENVIRONMENT" --token "$NEXLA_ACCESS_TOKEN"
