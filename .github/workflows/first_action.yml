@@ -22,17 +22,24 @@ jobs:
       run: |
         pip3 install nexla-3.2.1-py3-none-any.whl
 
+    - name: Install expect
+      run: sudo apt-get install -y expect
+
     - name: Debug Nexla Environment and Token
       run: |
         echo "Environment: ${{ secrets.NEXLA_ENVIRONMENT }}"
         echo "Access Token: ${{ secrets.NEXLA_ACCESS_TOKEN }}"
 
-    - name: Configuring Nexla Environment
+    - name: Configuring Nexla Environment using expect
       env:
         NEXLA_ENVIRONMENT: ${{ secrets.NEXLA_ENVIRONMENT }}
         NEXLA_ACCESS_TOKEN: ${{ secrets.NEXLA_ACCESS_TOKEN }}
       run: |
-        cat <<EOF | nexla env login
-        $NEXLA_ENVIRONMENT
-        $NEXLA_ACCESS_TOKEN
+        expect <<EOF
+        spawn nexla env configure
+        expect "NEXLA Environment"
+        send "$NEXLA_ENVIRONMENT\r"
+        expect "ENTER ACCESS TOKEN"
+        send "$NEXLA_ACCESS_TOKEN\r"
+        expect eof
         EOF
