@@ -47,3 +47,6 @@ jobs:
         send "$NEXLA_API_URL\r"
         expect eof
         EOF
+    - name: Export Development Flow Specification
+      run: |
+        nexla flows export -s 50593 -o /home/runner/work/Nexla_Poc/export_50593.json
