@@ -12,18 +12,54 @@ jobs:
 
     steps:
     - uses: actions/checkout@v3
+    
+    - name: Set up Python
+      uses: actions/setup-python@v2
+      with:
+        python-version: ${{ matrix.python-version }}
 
-    - name: Present Working Directory
+    - name: Install dependencies
       run: |
-        pwd
-        
-    - name: list of Directory
-      run: |
-        ls -l
+        pip3 install nexla-3.2.1-py3-none-any.whl
 
-    - name: All Directories
+    - name: Install expect
+      run: sudo apt-get install -y expect
+
+    - name: Debug Nexla Environment, Token, and API URL
       run: |
-        ls -la
+        echo "Environment: ${{ secrets.NEXLA_ENVIRONMENT }}"
+        echo "Access Token: ${{ secrets.NEXLA_ACCESS_TOKEN }}"
+        echo "API URL: ${{ secrets.NEXLA_API_URL }}"
+
+    - name: Configuring Nexla Environment using expect
+      env:
+        NEXLA_ENVIRONMENT: ${{ secrets.NEXLA_ENVIRONMENT }}
+        NEXLA_ACCESS_TOKEN: ${{ secrets.NEXLA_ACCESS_TOKEN }}
+        NEXLA_API_URL: ${{ secrets.NEXLA_API_URL }}
+      run: |
+        expect <<EOF
+        spawn nexla env configure
+        expect "NEXLA Environment"
+        send "$NEXLA_ENVIRONMENT\r"
+        expect "ENTER ACCESS TOKEN"
+        send "$NEXLA_ACCESS_TOKEN\r"
+        expect "Enter API URL"
+        send "$NEXLA_API_URL\r"
+        expect eof
+        EOF
+    - name: Export Development Flow Specification
+      run: |
+        nexla flows export -s 50593 -o /home/runner/work/Nexla_Poc/export_50593.json -a
+
+    - name: Export Development Flow Specification
+      run: |
+        cat /home/runner/work/Nexla_Poc/export_50593.json
+
+    - name: Export Development Flow Specification
+      run: |
+        cat /home/runner/work/Nexla_Poc/export_50593_properties.json
         
-    - name: List files in work directory
-      run: ls -R /home/runner/work
+    - name: Create Production Flows
+      run: |
+        nexla flows import -i /home/runner/work/Nexla_Poc/export_50593.json -p /home/runner/work/Nexla_Poc/export_50593_properties.json
+
