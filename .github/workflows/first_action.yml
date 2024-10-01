@@ -25,15 +25,17 @@ jobs:
     - name: Install expect
       run: sudo apt-get install -y expect
 
-    - name: Debug Nexla Environment and Token
+    - name: Debug Nexla Environment, Token, and API URL
       run: |
         echo "Environment: ${{ secrets.NEXLA_ENVIRONMENT }}"
         echo "Access Token: ${{ secrets.NEXLA_ACCESS_TOKEN }}"
+        echo "API URL: ${{ secrets.NEXLA_API_URL }}"
 
     - name: Configuring Nexla Environment using expect
       env:
         NEXLA_ENVIRONMENT: ${{ secrets.NEXLA_ENVIRONMENT }}
         NEXLA_ACCESS_TOKEN: ${{ secrets.NEXLA_ACCESS_TOKEN }}
+        NEXLA_API_URL: ${{ secrets.NEXLA_API_URL }}
       run: |
         expect <<EOF
         spawn nexla env configure
@@ -41,5 +43,7 @@ jobs:
         send "$NEXLA_ENVIRONMENT\r"
         expect "ENTER ACCESS TOKEN"
         send "$NEXLA_ACCESS_TOKEN\r"
+        expect "Enter API URL"
+        send "$NEXLA_API_URL\r"
         expect eof
         EOF
