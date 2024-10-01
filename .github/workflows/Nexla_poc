@@ -24,8 +24,9 @@ jobs:
 
     - name: Configuring Nexla Environment
       env:
-        NEXLA_ENVIRONMENT: ${{ secrets.NEXLA_ENVIRONMENT }}
-        NEXLA_ACCESS_TOKEN: ${{ secrets.NEXLA_ACCESS_TOKEN }}
+        NEXLA_ENVIRONMENT: dataops.nexla.io
+        NEXLA_ACCESS_TOKEN: eyJhbGciOiJIUzI1NiJ9.eyJ1aWQiOjE4ODQsIm9pZCI6MjA4LCJzdWIiOiJfTlhfQVBJXyIsImlhdCI6MTcyNzc2MDMyMywiZXhwIjoxNzI3ODQ2NzIzLCJlbnYiOiJwcm86NTcxZGYyNWRjYjIxYzhkMTc0YzU2NzY2ZGIzODhjNjEiLCJybmQiOiJoYjk0NXk5YyJ9.ot2H7FxcKeMTBGfNqlimOHw7AvmhrbJQGHnk7xI-wv0
       run: |
         nexla env configure \
         --environment "$NEXLA_ENVIRONMENT"
+        --environment "$NEXLA_ACCESS_TOKEN"
