@@ -32,6 +32,4 @@ jobs:
         NEXLA_ENVIRONMENT: dataops.nexla.io
         NEXLA_ACCESS_TOKEN: eyJhbGciOiJIUzI1NiJ9.eyJ1aWQiOjE4ODQsIm9pZCI6MjA4LCJzdWIiOiJfTlhfQVBJXyIsImlhdCI6MTcyNzc2MDMyMywiZXhwIjoxNzI3ODQ2NzIzLCJlbnYiOiJwcm86NTcxZGYyNWRjYjIxYzhkMTc0YzU2NzY2ZGIzODhjNjEiLCJybmQiOiJoYjk0NXk5YyJ9.ot2H7FxcKeMTBGfNqlimOHw7AvmhrbJQGHnk7xI-wv0
       run: |
-        nexla env configure \
-        --environment "$NEXLA_ENVIRONMENT" \
-        --token "$NEXLA_ACCESS_TOKEN"
+        nexla env configure --environment "$NEXLA_ENVIRONMENT" --token "$NEXLA_ACCESS_TOKEN"
