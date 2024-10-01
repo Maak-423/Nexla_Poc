@@ -24,5 +24,6 @@ jobs:
     - name: All Directories
       run: |
         ls -la
+        
     - name: List files in work directory
       run: ls -R /home/runner/work
