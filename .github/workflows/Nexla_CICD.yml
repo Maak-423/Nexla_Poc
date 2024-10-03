@@ -61,5 +61,5 @@ jobs:
         
     - name: Create Production Flows
       run: |
-        nexla flows import -i /home/runner/work/Nexla_Poc/export_50593.json -p /home/runner/work/Nexla_Poc/export_50593_properties.json
+        nexla flows import -i /home/runner/work/Nexla_Poc/export_50593.json -p /home/runner/work/Nexla_Poc/export_50593_properties.json --project 6582
 
