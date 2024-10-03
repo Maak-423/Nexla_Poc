@@ -18,6 +18,49 @@ jobs:
       with:
         python-version: ${{ matrix.python-version }}
 
-    - name: Nexla Import help
+    - name: Install dependencies
       run: |
-        nexla flow import --help
+        pip3 install nexla-3.2.1-py3-none-any.whl
+
+    - name: Install expect
+      run: sudo apt-get install -y expect
+
+    - name: Debug Nexla Environment, Token, and API URL
+      run: |
+        echo "Environment: ${{ secrets.NEXLA_ENVIRONMENT }}"
+        echo "Access Token: ${{ secrets.NEXLA_ACCESS_TOKEN }}"
+        echo "API URL: ${{ secrets.NEXLA_API_URL }}"
+
+    - name: Configuring Nexla Environment using expect
+      env:
+        NEXLA_ENVIRONMENT: ${{ secrets.NEXLA_ENVIRONMENT }}
+        NEXLA_ACCESS_TOKEN: ${{ secrets.NEXLA_ACCESS_TOKEN }}
+        NEXLA_API_URL: ${{ secrets.NEXLA_API_URL }}
+      run: |
+        expect <<EOF
+        spawn nexla env configure
+        expect "NEXLA Environment"
+        send "$NEXLA_ENVIRONMENT\r"
+        expect "ENTER ACCESS TOKEN"
+        send "$NEXLA_ACCESS_TOKEN\r"
+        expect "Enter API URL"
+        send "$NEXLA_API_URL\r"
+        expect eof
+        EOF
+    - name: Export Development Flow Specification
+      run: |
+        nexla flows export -s 50593 -o /home/runner/work/Nexla_Poc/export_50593.json -a
+
+    - name: Reading Exported json file
+      run: |
+        cat /home/runner/work/Nexla_Poc/export_50593.json
+        
+    - name: Reading exported properties file
+      run: |
+        cat /home/runner/work/Nexla_Poc/export_50593_properties.json
+        
+        
+    #- name: Create Production Flows
+      #run: |
+        #nexla flows import -i /home/runner/work/Nexla_Poc/export_50593.json -p /home/runner/work/Nexla_Poc/export_50593_properties.json
+
