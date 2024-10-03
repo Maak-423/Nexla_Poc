@@ -49,5 +49,5 @@ jobs:
         EOF
     - name: Export Development Flow Specification
       run: |
-        GET /data_flows
+        nexla -h
 
