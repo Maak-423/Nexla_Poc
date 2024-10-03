@@ -49,18 +49,5 @@ jobs:
         EOF
     - name: Export Development Flow Specification
       run: |
-        nexla flows export -s 6581 -o /home/runner/work/Nexla_Poc/export_50593.json -a
-
-    - name: Reading Exported json file
-      run: |
-        cat /home/runner/work/Nexla_Poc/export_50593.json
-        
-    - name: Reading exported properties file
-      run: |
-        cat /home/runner/work/Nexla_Poc/export_50593_properties.json
-        
-        
-    #- name: Create Production Flows
-      #run: |
-        #nexla flows import -i /home/runner/work/Nexla_Poc/export_50593.json -p /home/runner/work/Nexla_Poc/export_50593_properties.json
+        GET /data_flows
 
