@@ -53,11 +53,11 @@ jobs:
 
     - name: Reading Exported json file
       run: |
-        cat /home/runner/work/Nexla_Poc/export_50593.json
+        cat /home/runner/work/Nexla_Poc/export_50942.json
         
     - name: Reading exported properties file
       run: |
-        cat /home/runner/work/Nexla_Poc/export_50593_properties.json
+        cat /home/runner/work/Nexla_Poc/export_50942_properties.json
         
         
     - name: Create Production Flows
