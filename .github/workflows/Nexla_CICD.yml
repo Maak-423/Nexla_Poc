@@ -49,7 +49,7 @@ jobs:
         EOF
     - name: Export Development Flow Specification
       run: |
-        nexla flows export -s 50942 -o /home/runner/work/Nexla_Poc/Prod/export_50942.json -a
+        nexla flows export -s 50942 -o /home/runner/work/Nexla_Poc/export_50942.json -a
 
     - name: Reading Exported json file
       run: |
